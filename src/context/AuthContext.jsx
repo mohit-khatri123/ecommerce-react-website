@@ -1,8 +1,7 @@
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const AuthContext = createContext(null)
+const AuthContext = createContext(null)
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(
@@ -45,4 +44,11 @@ export default function AuthProvider({ children }) {
         setUser(null)
     }
     return (<AuthContext.Provider value={{ signUp,  user ,logout, login}}>{children}</AuthContext.Provider>)
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function useAuth() {
+    const context = useContext(AuthContext)
+
+    return context;
 }
